@@ -1,12 +1,19 @@
 import React from 'react'
 import styled from 'styled-components'
+import Background from "./whats.png";
+
 
 //Variables created for styling purposes:
+const Header = styled.div`
+background-color: #128C7E;
+width: 100%;
+height: 15%;
+justify-content:start;
+ali
+`
 
 const MainContainer = styled.div`
-width: 100%;
-height: 100vh;
-background-color: #075E54;
+
 display:flex;
 flex-direction:column;
 align-items: center;
@@ -17,11 +24,9 @@ display:flex;
 flex-direction:row;
 justify-content: space-evenly;
 align-items:center;
-/* width: 90%; */
-/* background-color: white; */
-/* margin: 10px; */
-/* border: black solid 1px;
-border-radius: 10px; */
+width: 100%; 
+margin: 10px; 
+border-radius: 10px; 
 `
 
 const InputUser = styled.input`
@@ -39,7 +44,7 @@ border-radius: 10px;
 `
 
 const SendButton = styled.p`
-width: 70px;
+width: 60px;
 background-color: #25D366;
 color: white;
 text-align:center;
@@ -47,25 +52,28 @@ border: white doble 10px;
 border-radius: 10px 0;
 cursor: pointer;
 padding:5px;
-`
 
+`
+//#ECE5DD
 const SentMessagesContainer = styled.div`
-width: 60%;
-height: 85vh;
-background-color: #ECE5DD;
+width: 40%;
+height: 95vh;
+background-image: url(${Background});
 padding: 10px;
 display:flex;
 flex-direction: column;
 justify-content: flex-end;
+
 `
 
 const MessageBaloon = styled.p`
 margin: 5px;
 position:relative;
-background-color: aqua;
+background-color: #128C7E;
 border: 1px solid black;
 border-radius: 10px;
 padding: 10px;
+
 `
 
 export default class Form extends React.Component {
@@ -119,7 +127,8 @@ export default class Form extends React.Component {
     render() {
 
         const SentMessages = this.state.inputs.map((message) => {
-            // if(message.user==="eu"){
+
+           // if(message.user==="eu"){
             // return (
             //     <MessageBaloon >
             //     </MessageBaloon>
