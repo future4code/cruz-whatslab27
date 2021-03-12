@@ -138,7 +138,7 @@ export default class Form extends React.Component {
 
         return (
             <MainContainer>
-                <SentMessagesContainer>{SentMessages}</SentMessagesContainer>
+                <SentMessagesContainer>{SentMessages}
                 <FormContainer>
                     {/* O evento "OnKeyDown" das seguintes tags for adicionado para a resolução do Desafio 1: */}
                     <InputUser 
@@ -155,6 +155,7 @@ export default class Form extends React.Component {
                     </InputMessage>
                     <SendButton onClick={this.addMessageClick}>Send</SendButton>
                 </FormContainer>
+                </SentMessagesContainer>
             </MainContainer>
         );
     }
