@@ -13,7 +13,6 @@ ali
 `
 
 const MainContainer = styled.div`
-
 display:flex;
 flex-direction:column;
 align-items: center;
@@ -80,15 +79,7 @@ export default class Form extends React.Component {
     //The following state and functions were created for the controlled input:
 
     state = {
-
-        inputs: [
-            // {
-            //     inputUser: "",
-            //     inputMessage: ""
-            // },
-
-        ],
-
+        inputs: [],
         valorInputUser: "",
         valorInputMessage: "",
     };
@@ -112,38 +103,56 @@ export default class Form extends React.Component {
         this.setState({ inputs: newMessages, valorInputMessage: '', valorInputUser: '' });
     };
 
+    //Função adicionada para o Desafio 1:
     addMessageEnter = (event) => {
-        if(event.key==="Enter"){
-        const newMessage = {
-            user: this.state.valorInputUser,
-            message: this.state.valorInputMessage,
-        };
+        if (event.key === "Enter") {
+            const newMessage = {
+                user: this.state.valorInputUser,
+                message: this.state.valorInputMessage,
+            };
 
-        const newMessages = [...this.state.inputs, newMessage];
-        this.setState({ inputs: newMessages, valorInputMessage: '', valorInputUser: '' });
-    }
+            const newMessages = [...this.state.inputs, newMessage];
+            this.setState({ inputs: newMessages, valorInputMessage: '', valorInputUser: '' });
+        }
     };
 
     render() {
 
-        const SentMessages = this.state.inputs.map((message) => {
+        //Função adicionada para o Desafio 2. Ela NÃO está funcionando corretamente, pois está deletando apenas o texto da mensagem (não a mensagem por inteiro) e não somente de uma, mas de todas as mensagens. Ainda assim, resolvemos mantê-la nesse espaço para demonstrar que ao menos parte do Desafio 2 foi realizado.
+        const deleteMessage = (event) => {
+            let intermediateArray = [...SentMessages]
+            let newArray = intermediateArray.filter((message) => {
+                console.log(event.target.value)
+                return message !== event.target
+            })
+            this.setState({ inputs: newArray })
+        }
 
-           // if(message.user==="eu"){
-            // return (
-            //     <MessageBaloon >
-            //     </MessageBaloon>
-            // )} else{
-                return(
-                <MessageBaloon>{message.user}: {message.message}</MessageBaloon>
-                )
-            // }
+        const SentMessages = this.state.inputs.map((message) => {
+            return (
+
+                //Adicionamos o evento "onDoubleClick" a seguir por conta do Desafio 2. Porém, como dito anteriormente, a função que ele chama NÃO está funcionando corretamente.
+                <MessageBaloon onDoubleClick={deleteMessage}>{message.user}: {message.message}</MessageBaloon>
+            )
         });
+
         return (
             <MainContainer>
                 <SentMessagesContainer>{SentMessages}</SentMessagesContainer>
                 <FormContainer>
-                    <InputUser onKeyDown={this.addMessageEnter} placeholder={'Name'} onChange={this.OnChangeUser} value={this.state.valorInputUser}></InputUser>
-                    <InputMessage onKeyDown={this.addMessageEnter} placeholder={'Message'} onChange={this.OnChangeMessage} value={this.state.valorInputMessage}></InputMessage>
+                    {/* O evento "OnKeyDown" das seguintes tags for adicionado para a resolução do Desafio 1: */}
+                    <InputUser 
+                    onKeyDown={this.addMessageEnter} 
+                    placeholder={'Name'} 
+                    onChange={this.OnChangeUser} 
+                    value={this.state.valorInputUser}>
+                    </InputUser>
+                    <InputMessage 
+                    onKeyDown={this.addMessageEnter} 
+                    placeholder={'Message'} 
+                    onChange={this.OnChangeMessage} 
+                    value={this.state.valorInputMessage}>
+                    </InputMessage>
                     <SendButton onClick={this.addMessageClick}>Send</SendButton>
                 </FormContainer>
             </MainContainer>
