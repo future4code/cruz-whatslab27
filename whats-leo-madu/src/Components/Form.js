@@ -93,7 +93,7 @@ export default class Form extends React.Component {
         this.setState({ valorInputMessage: event.target.value })
     }
 
-    addMessage = () => {
+    addMessageClick = () => {
 
         const newMessage = {
             user: this.state.valorInputUser,
@@ -104,26 +104,38 @@ export default class Form extends React.Component {
         this.setState({ inputs: newMessages, valorInputMessage: '', valorInputUser: '' });
     };
 
+    addMessageEnter = (event) => {
+        if(event.key==="Enter"){
+        const newMessage = {
+            user: this.state.valorInputUser,
+            message: this.state.valorInputMessage,
+        };
+
+        const newMessages = [...this.state.inputs, newMessage];
+        this.setState({ inputs: newMessages, valorInputMessage: '', valorInputUser: '' });
+    }
+    };
+
     render() {
 
         const SentMessages = this.state.inputs.map((message) => {
-            if(message.user==="eu"){
-            return (
-                <MessageBaloon >
-                </MessageBaloon>
-            )} else{
+            // if(message.user==="eu"){
+            // return (
+            //     <MessageBaloon >
+            //     </MessageBaloon>
+            // )} else{
                 return(
                 <MessageBaloon>{message.user}: {message.message}</MessageBaloon>
                 )
-            }
+            // }
         });
         return (
             <MainContainer>
                 <SentMessagesContainer>{SentMessages}</SentMessagesContainer>
                 <FormContainer>
-                    <InputUser placeholder={'Name'} onChange={this.OnChangeUser} value={this.state.valorInputUser}></InputUser>
-                    <InputMessage placeholder={'Message'} onChange={this.OnChangeMessage} value={this.state.valorInputMessage}></InputMessage>
-                    <SendButton onClick={this.addMessage}>Send</SendButton>
+                    <InputUser onKeyDown={this.addMessageEnter} placeholder={'Name'} onChange={this.OnChangeUser} value={this.state.valorInputUser}></InputUser>
+                    <InputMessage onKeyDown={this.addMessageEnter} placeholder={'Message'} onChange={this.OnChangeMessage} value={this.state.valorInputMessage}></InputMessage>
+                    <SendButton onClick={this.addMessageClick}>Send</SendButton>
                 </FormContainer>
             </MainContainer>
         );
