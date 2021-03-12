@@ -29,11 +29,20 @@ text-align:center;
 
 export default class Form extends React.Component {
     //The following state and functions were created for the controlled input:
-    
+
     state = {
-        inputUser: '',
-        inputMessage: '',
-    }
+
+        inputs: [
+            {
+                inputUser: "",
+                inputMessage: ""
+            },
+
+        ],
+
+        valorInputUser: "",
+        valorInputMessage: "",
+    };
 
     OnChangeUser = (event) => {
         this.setState({ inputUser: event.target.value })
